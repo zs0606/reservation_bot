@@ -7,6 +7,8 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var reservationsRouter = require("./routes/reservations");
 
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
+
 var app = express();
 
 // view engine setup
