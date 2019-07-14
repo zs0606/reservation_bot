@@ -35,6 +35,7 @@ const createReservation = (msg, reservationInfoArr) => {
     const reservationDate = makeDate(reservationInfoArr[1], reservationInfoArr[2]);
     return { id: msg.SmsMessageSid,
              name: reservationInfoArr[0],
+             dateTime: reservationDate,
              phoneNumber: msg.From,
              rawMessage: msg.Body };
 };
