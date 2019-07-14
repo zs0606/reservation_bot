@@ -1,22 +1,25 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-const MessagingResponse = require("twilio").twiml.MessagingResponse;
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const {createReservation} = require('./reservations.helper');
+const database = [];
 
 /* GET users listing. */
-router.get("/", function(req, res, next) {
+router.get('/', function(req, res, next) {
   // res.send('respond with a resource');
-  res.json([
-    { id: 1, name: "Eli Ferdinand, party of 2 @ 8pm" },
-    { id: 2, name: "Cecilija Frantzisko, party of 5 @ 3pm" }
-  ]);
+  res.json(database);
 });
 
-router.post("/sms", (req, res) => {
-  const twiml = new MessagingResponse();
+/* POST user request reservation through message and create new reservation*/
+router.post('/sms', (req, res) => {
+const newReservation = createReservation(req.body);
+database.push(newReservation);
+const twiml = new MessagingResponse();
+  twiml.message('Your reservation was successful');
 
-  twiml.message("The Robots are coming! Head for the hills!");
+  res.writeHead(200, { 'Content-Type': 'text/xml' });
 
-  res.writeHead(200, { "Content-Type": "text/xml" });
+
   res.end(twiml.toString());
 });
 
