@@ -9,6 +9,7 @@ const mockMessage = "John 9-15 4pm";
 
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
+const validFutureDate = new Date(currentYear + 1, 1, 1, 15);
 
 const futureRequest = {
   ToCountry: "US",
@@ -54,7 +55,10 @@ test("test parseDateTime fail array", () => {
   expect(parseDateTime(["1", "2", "3", "4"]).valueOf()).toBeNaN();
 });
 
-test.todo("validateReservation true");
+test("validateReservation true", () => {
+  expect(validateReservation(validFutureDate)).toBe(true);
+});
+
 test.todo("validateReservation false Invalid Date");
 test.todo("validateReservation false past date");
 
