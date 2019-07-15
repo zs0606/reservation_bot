@@ -93,4 +93,9 @@ const reservationMaker = twilioReq => {
 
 // module.exports = {createReservation, validReservationRequest, reservationInfo};
 
-module.exports = { reservationMaker };
+module.exports = {
+  reservationMaker,
+  parseRequestBody,
+  parseDateTime,
+  validateReservation
+};
