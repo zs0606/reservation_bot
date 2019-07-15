@@ -7,6 +7,9 @@ const {
 
 const mockMessage = "John 9-15 4pm";
 
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+
 const futureRequest = {
   ToCountry: "US",
   ToState: "NY",
@@ -37,4 +40,19 @@ test("sms message is parsed by parseRequestBody", () => {
   ]);
 });
 
-test.todo("validate parseDateTime");
+test("test parseDateTime pass", () => {
+  expect(parseDateTime(["John", "9-15", "4pm"])).toStrictEqual(
+    new Date(currentYear, 8, 15, 16)
+  );
+});
+
+test.todo("test parseDateTime fail");
+test.todo("validateReservation true");
+test.todo("validateReservation false Invalid Date");
+test.todo("validateReservation false past date");
+test.todo("validateReservation false outside open hours");
+test.todo("reservationMaker return reservationObject");
+test.todo("reservationMaker return null");
+// test.todo("");
+// test.todo("");
+// test.todo("");
