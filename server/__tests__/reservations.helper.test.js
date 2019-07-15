@@ -9,6 +9,9 @@ const mockMessage = "John 9-15 4pm";
 
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
+const validFutureDate = new Date(currentYear + 1, 1, 1, 15);
+const invalidDate = new Date(1, 13, 2, 2);
+const pastDate = new Date(currentYear - 1, 1, 1, 15);
 
 const futureRequest = {
   ToCountry: "US",
@@ -46,10 +49,25 @@ test("test parseDateTime pass", () => {
   );
 });
 
-test.todo("test parseDateTime fail");
-test.todo("validateReservation true");
-test.todo("validateReservation false Invalid Date");
-test.todo("validateReservation false past date");
+test("test parseDateTime fail non-array", () => {
+  expect(parseDateTime(null)).toBe("Invalid Date");
+});
+
+test("test parseDateTime fail array", () => {
+  expect(parseDateTime(["1", "2", "3", "4"]).valueOf()).toBeNaN();
+});
+
+test("validateReservation true", () => {
+  expect(validateReservation(validFutureDate)).toBe(true);
+});
+
+test("validateReservation false Invalid Date", () => {
+  expect(validateReservation(invalidDate)).toBe(false);
+});
+test("validateReservation false past date", () => {
+  expect(validateReservation(pastDate)).toBe(false);
+});
+
 test.todo("validateReservation false outside open hours");
 test.todo("reservationMaker return reservationObject");
 test.todo("reservationMaker return null");
