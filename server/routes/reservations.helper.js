@@ -1,22 +1,27 @@
 // Takes a message in the format 'NAME MM-DD HHpm' and returns an array of info
 const parseRequestBody = requestBody => {
-  return requestBody.split(" ");
+  return requestBody.split(' ');
 };
 
 const parseDateTime = messageArray => {
+  try {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
 
-  const [month, date] = messageArray[1].split("-").map(int => parseInt(int));
+  const [month, date] = messageArray[1].split('-').map(int => parseInt(int));
 
-  const time = parseInt(messageArray[2].replace(/\D/g, ""));
+  const time = parseInt(messageArray[2].replace(/\D/g, ''));
   const parsedDate = new Date(currentYear, month - 1, date, time + 12);
+
   return parsedDate;
+  } catch (err) {
+    return 'Invalid Date';
+  }
 };
 
 const validateReservation = dateTime => {
   const currentDate = new Date();
-  if (dateTime == "Invalid Date") {
+  if (dateTime == 'Invalid Date') {
     return false;
   } else if (dateTime < currentDate) {
     //check if the reservation date and time past today
