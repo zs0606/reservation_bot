@@ -54,8 +54,12 @@ const database = [
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
+  const currentDate = new Date();
   // res.send('respond with a resource');
-  res.json(database);
+  const filteredDatabase = database.filter(
+    reservation => reservation.dateTime > currentDate
+  );
+  res.json(filteredDatabase);
 });
 
 /* POST user request reservation through message and create new reservation*/
