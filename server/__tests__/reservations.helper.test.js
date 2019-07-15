@@ -46,10 +46,18 @@ test("test parseDateTime pass", () => {
   );
 });
 
-test.todo("test parseDateTime fail");
+test("test parseDateTime fail non-array", () => {
+  expect(parseDateTime(null)).toBe("Invalid Date");
+});
+
+test("test parseDateTime fail array", () => {
+  expect(parseDateTime(["1", "2", "3", "4"]).valueOf()).toBeNaN();
+});
+
 test.todo("validateReservation true");
 test.todo("validateReservation false Invalid Date");
 test.todo("validateReservation false past date");
+
 test.todo("validateReservation false outside open hours");
 test.todo("reservationMaker return reservationObject");
 test.todo("reservationMaker return null");
