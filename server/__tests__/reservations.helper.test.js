@@ -11,6 +11,7 @@ const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const validFutureDate = new Date(currentYear + 1, 1, 1, 15);
 const invalidDate = new Date(1, 13, 2, 2);
+const pastDate = new Date(currentYear - 1, 1, 1, 15);
 
 const futureRequest = {
   ToCountry: "US",
@@ -63,7 +64,9 @@ test("validateReservation true", () => {
 test("validateReservation false Invalid Date", () => {
   expect(validateReservation(invalidDate)).toBe(false);
 });
-test.todo("validateReservation false past date");
+test("validateReservation false past date", () => {
+  expect(validateReservation(pastDate)).toBe(false);
+});
 
 test.todo("validateReservation false outside open hours");
 test.todo("reservationMaker return reservationObject");
