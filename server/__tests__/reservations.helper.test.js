@@ -10,6 +10,7 @@ const mockMessage = "John 9-15 4pm";
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();
 const validFutureDate = new Date(currentYear + 1, 1, 1, 15);
+const invalidDate = new Date(1, 13, 2, 2);
 
 const futureRequest = {
   ToCountry: "US",
@@ -59,7 +60,9 @@ test("validateReservation true", () => {
   expect(validateReservation(validFutureDate)).toBe(true);
 });
 
-test.todo("validateReservation false Invalid Date");
+test("validateReservation false Invalid Date", () => {
+  expect(validateReservation(invalidDate)).toBe(false);
+});
 test.todo("validateReservation false past date");
 
 test.todo("validateReservation false outside open hours");
